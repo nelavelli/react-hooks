@@ -6,7 +6,6 @@ const InputElement = () => {
 
   return (
     <div>
-      {" "}
       <input
         onChange={(e) => {
           setInputText(e.target.value);
@@ -14,7 +13,7 @@ const InputElement = () => {
         }}
         type="text"
         placeholder="Enter Some Text"
-      />{" "}
+      />
       <br />
       {inputText}
       <hr />
