@@ -1,34 +1,33 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 export default function ImageToggleOnScroll({ primaryImg, secondaryImg }) {
   const imageRef = useRef(null);
-
   const [inView, setInView] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-  const isInView = () => {
+  const isInview = () => {
     const rect = imageRef.current.getBoundingClientRect();
     return rect.top >= 0 && rect.bottom <= window.innerHeight;
   };
 
-  const scrollHandler = () => setInView(isInView());
+  const scrollHandler = () => {
+    setInView(isInview());
+  };
 
   useEffect(() => {
-    setIsLoading(false);
-    setInView(isInView());
-    window.addEventListener("scroll", scrollHandler);
-    return () => {
-      window.removeEventListener("scroll", scrollHandler);
-    };
+    setLoading(false);
+    setInView(isInview());
+    window.addEventListener('scroll', scrollHandler);
+    return () => window.removeEventListener('scroll', scrollHandler);
   }, []);
 
   return (
     <img
-      src={
-        isLoading ? "/images/loading.gif" : inView ? secondaryImg : primaryImg
-      }
+      src={loading ? '/static/loading.gif' : inView ? secondaryImg : primaryImg}
       alt=""
       ref={imageRef}
+      width="300"
+      height="300"
     />
   );
 }
